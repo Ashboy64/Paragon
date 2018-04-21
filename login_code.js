@@ -16,6 +16,13 @@ function sign_out() {
   add_listeners();
 }
 
+function sign_up() {
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  });
+}
+
 // $(document).ready(function () {
 //   $("#login_button").click(function () {
 //     alert("email: " + $("#InputEmail1").val());
