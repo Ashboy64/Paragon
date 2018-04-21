@@ -6,11 +6,14 @@ function login(email, password) {
     var errorMessage = error.message;
     alert(errorMessage)
   });
-  alert("here")
+  alert("here");
+  add_listeners();
 }
 
 function sign_out() {
   firebase.auth().signOut()
+  alert("signed out")
+  add_listeners();
 }
 
 // $(document).ready(function () {
@@ -24,11 +27,15 @@ function sign_out() {
 //   });
 // });
 
-window.onload = function() {
+function add_listeners() {
   document.getElementById("login_button").onclick = function() {
     login();
   }
   document.getElementById("logout_button").onclick = function() {
     sign_out();
   }
+}
+
+window.onload = function() {
+  add_listeners();
 }
