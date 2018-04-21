@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 #map{
   height: 90%;
   width: 90%;
+=======
+#login_div {
+  width:50%;
+  align-self: center;
+  margin: auto;
+  margin-top: 10%;
+>>>>>>> 7ae1fc3b924e181bb5efc36011cbaaa24e4d52e5
 }
