@@ -10,7 +10,7 @@
        * element that contains the map. */
       #map {
         height: 100%;
-        width:80%;
+        width:100%;
         float: right;
       }
       /* Optional: Makes the sample page fill the window. */
@@ -20,6 +20,7 @@
         padding: 0;
       }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
     <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
     <script>
       // Initialize Firebase
@@ -33,6 +34,7 @@
         };
       firebase.initializeApp(config);
     </script>
+    <script src="../firebase_functions.js"> </script>
     <script src = "mapTest.js">
     </script>
   </head>
@@ -42,5 +44,6 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1TGTb7Khf0s7nhhjkpw97_F4bk6wKKME&libraries=places&callback=initMap">
     </script>
+    <p id="latLong"> </p>
   </body>
 </html>
