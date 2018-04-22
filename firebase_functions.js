@@ -6,9 +6,24 @@ function login(email, password) {
     var errorMessage = error.message;
     alert(errorMessage)
   });
+
+  var charity_sign = firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/is_special');
+  await charity_sign.once("value").then(function(snapshot){
+    var special = snapshot.val();
+  });
+
+  if(special){
+    //window.location.href =
+  }
+  else{
+    //window.location.href = 
+  }
+
+
+
+
   donate("random3");
   createDonationRequest("yoo", 2, 2, "random", "nanoseed")
-  generate_possible_events();
   alert("here");
   add_listeners();
 }
@@ -26,6 +41,11 @@ function sign_up() {
   });
 }
 
+
+function admin_sign_up(){
+    firebase.auth().
+}
+
 function add_listeners() {
   document.getElementById("login_button").onclick = function() {
     login();
@@ -38,6 +58,9 @@ function add_listeners() {
 window.onload = function() {
   add_listeners();
 }
+
+
+
 
 
 async function donate(item_tag) {
@@ -69,34 +92,27 @@ function getRecommendations(donation_history_dict, possible_events) { // Sorted 
   var max_2 = Object.keys(donation_history_dict_2).reduce(function(a, b){ return donation_history_dict_2[a] > donation_history_dict_2[b] ? a : b });
 
   var counter = 0;
-  var rec_arr = [];
-  var unused_buffer = [];
-  var save_to_unused = true;
+  var rec_arr = []
   for (var i = 0; i<10; i++) {
     if ((possible_events[i][type] == max) || (possible_events[i][type] == max_2)) {
       rec_arr.append(i);
-    } else if(save_to_unused) {
-      save_to_unused.append()
     }
   }
-  if(len(rec_arr)<10){
-
-  }
   return rec_arr;
+}
+
+function generate_possible_events() {
+  // fill in with code to sort a given array of events by "trend". the trend property of an event is not yet initialized in firebase
 }
 
 async function send_donate_notif() {
   Email.send("email.paragon.official@gmail.com",
     await firebase.database().ref('donation_requests/email').once("value").then(function(snapshot){
-      var email = snapshot.val();
+      return snapshot.val();
     }),
-    "This is a subject",
-    "this is the body",
-    "smtp.yourisp.com",
-    "username",
-    "password");
-}
-
-function send_donate_notif() {
-
+    "Someone has shown interest in your organization",
+    firebase.auth().currentUser.email + ' wishes to send you a donation! \n Congratulations! \n Feel free to reach out to this individual',
+  "smtp.yourisp.com",
+  "username",
+  "password");
 }
