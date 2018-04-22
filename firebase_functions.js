@@ -7,7 +7,7 @@ function login(email, password) {
     alert(errorMessage)
   });
   donate("random3");
-  createDonationRequest("yoo", 2, 2, "random")
+  createDonationRequest("yoo", 2, 2, "random", "nanoseed")
   alert("here");
   add_listeners();
 }
@@ -54,8 +54,33 @@ async function donate(item_tag) {
   firebase.database().ref(location).child(item_tag + "").set(donation_num + 1);
 }
 
-function createDonationRequest(req, lat, lang, type) {
+function createDonationRequest(req, lat, lang, type, org) {
   firebase.database().ref('donation_requests/' + req).child("lat").set(lat);
   firebase.database().ref('donation_requests/' + req).child("lang").set(lang);
   firebase.database().ref('donation_requests/' + req).child("type").set(type);
+  firebase.database().ref('donation_requests/' + req).child("email").set(firebase.auth().currentUser.email);
+  firebase.database().ref('donation_requests/' + req).child("organization").set(org);
+}
+
+function getRecommendations(donation_history_dict, possible_events) { // Sorted array of event objects, decreasing order of trend
+  var max = Object.keys(donation_history_dict).reduce(function(a, b){ return donation_history_dict[a] > donation_history_dict[b] ? a : b });
+  var donation_history_dict_2 = _objectWithoutProperties(donation_history_dict, [str(max)])
+  var max_2 = Object.keys(donation_history_dict_2).reduce(function(a, b){ return donation_history_dict_2[a] > donation_history_dict_2[b] ? a : b });
+
+  var counter = 0;
+  var rec_arr = []
+  for (var i = 0; i<10; i++) {
+    if ((possible_events[i][type] == max) || (possible_events[i][type] == max_2)) {
+      rec_arr.append(i);
+    }
+  }
+  return rec_arr;
+}
+
+function generate_possible_events() {
+  // fill in with code to sort a given array of events by "trend". the trend property of an event is not yet initialized in firebase
+}
+
+function send_donate_notif() {
+  
 }
