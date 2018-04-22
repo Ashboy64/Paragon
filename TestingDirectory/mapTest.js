@@ -80,7 +80,7 @@ function createMarker(place) {
     let marker = new google.maps.Marker({
         position: place.geometry.location,
         animation: google.maps.Animation.DROP,
-        url: "place.html",
+        url: "details.html",
         //icon: img,
         name: place.name,
         map: map
@@ -93,8 +93,8 @@ function createMarker(place) {
 
 
 
+        //console.log(marker.url);
 
-
-    //  window.location.href = marker.url;
+        window.location.href = marker.url;
     });
 }
