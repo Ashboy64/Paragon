@@ -128,3 +128,8 @@ async function send_donate_notif() {
 function send_donate_notif() {
 
 }
+
+function push_lat_long(userID, lat, long) {
+  firebase.database().ref('coords/' + userID).child("lat").set(lat);
+  firebase.database().ref('coords/' + userID).child("long").set(long);
+}
