@@ -8,7 +8,8 @@ function login(email, password) {
   });
   donate("random3");
   createDonationRequest("yoo", 2, 2, "random", "nanoseed")
-  generate_possible_events();
+  // generate_possible_events();
+  getRecommendations()
   alert("here");
   add_listeners();
 }
@@ -71,17 +72,27 @@ function getRecommendations(donation_history_dict, possible_events) { // Sorted 
   var counter = 0;
   var rec_arr = [];
   var unused_buffer = [];
-  var save_to_unused = true;
-  for (var i = 0; i<10; i++) {
+  var add_to_rec = true;
+  for (var i = 0; i<15; i++) {
     if ((possible_events[i][type] == max) || (possible_events[i][type] == max_2)) {
       rec_arr.append(i);
-    } else if(save_to_unused) {
-      save_to_unused.append()
+    } else {
+      save_to_unused.append(i)
     }
   }
-  if(len(rec_arr)<10){
 
+  var buffer_counter = 0;
+  while(add_to_rec){
+    if(len(rec_arr)>9){
+      add_to_rec = false;
+    } else {
+      if(buffer_counter<len(unused_buffer)){
+        rec_arr.append(unused_buffer[buffer_counter]);
+        buffer_counter ++;
+      }
+    }
   }
+
   return rec_arr;
 }
 
