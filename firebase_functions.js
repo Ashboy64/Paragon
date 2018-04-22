@@ -8,6 +8,7 @@ function login(email, password) {
   });
   donate("random3");
   createDonationRequest("yoo", 2, 2, "random", "nanoseed")
+  generate_possible_events();
   alert("here");
   add_listeners();
 }
@@ -77,10 +78,16 @@ function getRecommendations(donation_history_dict, possible_events) { // Sorted 
   return rec_arr;
 }
 
-function generate_possible_events() {
-  // fill in with code to sort a given array of events by "trend". the trend property of an event is not yet initialized in firebase
+async function generate_possible_events() {
+  // fill in with code to sort a given array of events by "trend".
+  // the trend property of an event is not yet initialized in firebase
+  // for now, filing in/ generating randomly
+  await firebase.database().ref('donation_requests/').once("value").then(function(snapshot) {
+    console.log("mmmh")
+    console.log(snapshot.val());
+  });
 }
 
 function send_donate_notif() {
-  
+
 }
