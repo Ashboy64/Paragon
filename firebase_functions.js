@@ -85,14 +85,16 @@ function getRecommendations(donation_history_dict, possible_events) { // Sorted 
   return rec_arr;
 }
 
-async function generate_possible_events() {
-  // fill in with code to sort a given array of events by "trend".
-  // the trend property of an event is not yet initialized in firebase
-  // for now, filing in/ generating randomly
-  await firebase.database().ref('donation_requests/').once("value").then(function(snapshot) {
-    console.log("mmmh")
-    console.log(snapshot.val());
-  });
+async function send_donate_notif() {
+  Email.send("email.paragon.official@gmail.com",
+    await firebase.database().ref('donation_requests/email').once("value").then(function(snapshot){
+      var email = snapshot.val();
+    }),
+    "This is a subject",
+    "this is the body",
+    "smtp.yourisp.com",
+    "username",
+    "password");
 }
 
 function send_donate_notif() {
