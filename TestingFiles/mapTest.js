@@ -15,11 +15,16 @@ function initMap() {
       lng: position.coords.longitude
     };
 
+    console.log(pos.lat);
+    console.log(pos.lng);
+
     var marker = new google.maps.Marker({
             position: pos,
             // icon: "https://previews.123rf.com/images/asmati/asmati1602/asmati160202762/52163144-disabled-sign-flat-style-icon-on-transparent-background.jpg",
             map: map
     });
+
+
 
     // infoWindow = new google.maps.InfoWindow;
     //
@@ -34,11 +39,16 @@ function initMap() {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
+
+  var mark = new google.maps.Marker({
+        position: new google.maps.LatLng(0, 0);
+  });
+
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
-  infoWindow.setContent(browserHasGeolocation ?
+  infoWindowmap.setContent(browserHasGeolocation ?
                       'Error: The Geolocation service failed.' :
                       'Error: Your browser doesn\'t support geolocation.');
                       infoWindow.open(map);
