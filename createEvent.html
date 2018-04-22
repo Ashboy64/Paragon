@@ -19,7 +19,10 @@
           };
         firebase.initializeApp(config);
       </script>
-      <script src="createEvent.js"> </script>
+      
+      <!-- <script src="firebase_functions.js"></script> -->
+      <script src="createEvent.js"></script>
+
     </head>
 
     <body>
@@ -38,15 +41,16 @@
           <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
         </div>
         <div class="form-group">
-          <label for="stateName">State Name</label>
-          <input type="state" class="form-control" id="StateName" placeholder="State Name" style="width:500px">
-          <label for="zipCode">Zip Code</label>
-          <input type="zipCode" class="form-control" id="ZipCode" placeholder="Zip Code" style="width:500px">
-          <label for="address">Address</label>
+          <label for="stateName">Request Details</label>
+          <input type="text" class="form-control" id="RequestDetails" placeholder="Request Details" style="width:500px">
+          <label for="zipCode">Type</label>
+          <input type="zipCode" class="form-control" id="type_event" placeholder="Zip Code" style="width:500px">
+          <label for="address">Address (Make sure to include your state and ZIP Code)</label>
           <input type="address" class="form-control" id="Address" placeholder="Address" style="width:500px">
         </div>
         <div id="address_button" class="btn btn-primary">Confirm Location</div>
       </form>
-
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1TGTb7Khf0s7nhhjkpw97_F4bk6wKKME"></script>
+      <script src="createEvent.js"></script>
     </body>
   </html>
