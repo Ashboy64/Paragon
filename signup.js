@@ -37,7 +37,7 @@ $(document).ready(function () {
       }
 
     }
-    alert("signed up successfully");
+    // alert("signed up successfully");
   }
 
 });
