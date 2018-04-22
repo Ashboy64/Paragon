@@ -6,9 +6,9 @@ function login(email, password) {
     var errorMessage = error.message;
     alert(errorMessage)
   });
-  // donate("random3");
-  // createDonationRequest("yoo", 2, 2, "random")
-  // alert("here");
+  donate("random3");
+  createDonationRequest("yoo", 2, 2, "random")
+  alert("here");
   add_listeners();
 }
 
