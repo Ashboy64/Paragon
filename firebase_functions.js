@@ -10,6 +10,9 @@ function login() {
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
+    $("#logout_button").css("display", "block");
+    $("#login_button").css("display", "none");
+    $("#signup_button").css("display", "none");
     donate("random3");
     createDonationRequest("yoo", 2, 2, "random", "nanoseed");
     test_donation_history_dict = {"troll": 5, "breh": 3, "yo": 2};
@@ -18,6 +21,9 @@ firebase.auth().onAuthStateChanged(function(user) {
     alert("here");
     add_listeners();
   } else {
+    $("#logout_button").css("display", "none");
+    $("#login_button").css("display", "block");
+    $("#signup_button").css("display", "block");
     add_listeners();
   }
 });
@@ -141,4 +147,20 @@ async function read_lat_long(){
     results = snapshot.val();
   });
   return results;
+}
+
+async function read_lat_long(){
+  var lat;
+  var lng;
+  var name;
+  await firebase.database().ref('normCoords/' + firebase.auth().currentUser.uid + "/lat").once("value").then(function(snapshot){
+    lat = snapshot.val();
+  });
+  await firebase.database().ref('normCoords/' + firebase.auth().currentUser.uid + "/long").once("value").then(function(snapshot){
+    lng = snapshot.val();
+  });
+  await firebase.database().ref('normCoords/' + firebase.auth().currentUser.uid + "/name").once("value").then(function(snapshot){
+    name = snapshot.val();
+  });
+  return {lat: lat, lng:lng, name:name};
 }
