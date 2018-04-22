@@ -3,13 +3,18 @@
 }
 
 #search{
-  margin: 5px;
-  width: 93%;
+  margin: 10px;
+  width: 280px;
+}
+
+#trending{
+  margin: 10px;
+  width: 135px;
+  float: center;
 }
 
 #trending, #suggestions{
-  margin: 5px;
-  width: 45%;
+  width: 135px;
   float: center;
 }
 
@@ -21,7 +26,7 @@
 
 #signup{
   margin: 5px;
-  margin-left: 90%;s
+  margin-left: 90%;
   width: 150px;
   float: right;
 }
