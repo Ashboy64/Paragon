@@ -128,3 +128,17 @@ async function send_donate_notif() {
 function send_donate_notif() {
 
 }
+
+function push_lat_long(userID, lat, long, name) {
+  firebase.database().ref('normCoords/' + userID).child("lat").set(lat);
+  firebase.database().ref('normCoords/' + userID).child("long").set(long);
+  firebase.database().ref('normCoords/' + userID).child("name").set(name);
+}
+
+async function read_lat_long(){
+  var results;
+  await firebase.database().ref('normCoords/').once("value").then(function(snapshot){
+    results = snapshot.val();
+  });
+  return results;
+}

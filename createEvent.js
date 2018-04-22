@@ -1,31 +1,44 @@
-function initMap(address) {
 
+var pos;
+$(document).ready(function () {
+  $("#address_button").click(function() {
+    getLatLng();
+    //console.log($("#Address").val();
+    /*console.log(pos == undefined);
+    console.log("lat: " + String(pos.position.lat()));
+    console.log("long: " + String(pos.position.lng()));
+    firebase.database().ref("users/" + firebase.auth().currentUser.uid + "/orgName").once("value").then(function(snapshot) {
+      createDonationRequest($("#RequestDetails").val(), pos[lat], pos[long], $("#type_event").val(), snapshot.val());
+    });*/
+  });
+
+  function getLatLng(){
     var geocoder = new google.maps.Geocoder();
+    var address = $("#Address").val();
+
 
     geocoder.geocode( { 'address': address}, function(results, status) {
-
-        if (status == google.maps.GeocoderStatus.OK) {
-            var latitude = results[0].geometry.location.lat();
-            var longitude = results[0].geometry.location.lng();
+      if (status == google.maps.GeocoderStatus.OK) {
+        pos = {
+          position: results[0].geometry.location
+      ,
         }
+        console.log(pos == undefined);
 
-        console.log(latitude);
-        console.log(longitude);
-
-        var myLatLng = {lat: latitude, lng: longitude};
-
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: myLatLng
+        firebase.database().ref("users/" + firebase.auth().currentUser.uid + "/orgName").once("value").then(function(snapshot) {
+          createDonationRequest($("#RequestDetails").val(), pos.position.lat(), pos.position.lng(), $("#type_event").val(), snapshot.val());
         });
 
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            title: 'Hello World!'
-        });
-
+      }
     });
+  }
 
+  function createDonationRequest(req, lat, lang, type, org) {
+    firebase.database().ref('donation_requests/' + req).child("lat").set(lat);
+    firebase.database().ref('donation_requests/' + req).child("lang").set(lang);
+    firebase.database().ref('donation_requests/' + req).child("type").set(type);
+    firebase.database().ref('donation_requests/' + req).child("email").set(firebase.auth().currentUser.email);
+    firebase.database().ref('donation_requests/' + req).child("organization").set(org);
+  }
 
-}
+});
