@@ -80,3 +80,7 @@ function getRecommendations(donation_history_dict, possible_events) { // Sorted 
 function generate_possible_events() {
   // fill in with code to sort a given array of events by "trend". the trend property of an event is not yet initialized in firebase
 }
+
+function send_donate_notif() {
+  
+}
