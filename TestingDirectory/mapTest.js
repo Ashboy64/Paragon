@@ -1,4 +1,6 @@
-var map
+let places = [];
+
+/*var map
 var latitude
 var longitude
 
@@ -53,3 +55,5 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                       'Error: Your browser doesn\'t support geolocation.');
                       infoWindow.open(map);
   }
+
+  */
