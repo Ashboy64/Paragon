@@ -129,7 +129,8 @@ function send_donate_notif() {
 
 }
 
-function push_lat_long(userID, lat, long) {
-  firebase.database().ref('coords/' + userID).child("lat").set(lat);
-  firebase.database().ref('coords/' + userID).child("long").set(long);
+function push_lat_long(userID, lat, long, name) {
+  firebase.database().ref('normCoords/' + userID).child("lat").set(lat);
+  firebase.database().ref('normCoords/' + userID).child("long").set(long);
+  firebase.database().ref('normCoords/' + userID).child("name").set(name);
 }
