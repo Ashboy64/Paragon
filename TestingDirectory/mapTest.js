@@ -4,8 +4,18 @@
 // locate you.
 
 
+
 var map, infoWindow;
 var service;
+
+async function getData() {
+  var database = firebase.database().ref("donation_requests");
+  await database.once("value").then(function(snapshot) {
+    console.log(snapshot.val());
+  });
+}
+getData();
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: -34.397, lng: 150.644},
@@ -72,13 +82,14 @@ function createMarker(place) {
         animation: google.maps.Animation.DROP,
         url: "place.html",
         //icon: img,
+        name: place.name,
         map: map
     });
     google.maps.event.addListener(marker, 'click', function() {
 
 
-        localStorage.setItem("Latitude", marker.getPosition().lat());
-        console.log(localStorage.getItem("Latitude"));
+        push_lat_long(firebase.auth().currentUser.uid, marker.getPosition().lat(), marker.getPosition().lng(), marker.name);
+
 
 
 
