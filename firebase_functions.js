@@ -8,6 +8,7 @@ function login(email, password) {
   });
   donate("random3");
   createDonationRequest("yoo", 2, 2, "random", "nanoseed")
+  generate_possible_events();
   alert("here");
   add_listeners();
 }
@@ -39,9 +40,6 @@ window.onload = function() {
 }
 
 
-
-
-
 async function donate(item_tag) {
 
   var currentUser = firebase.auth().currentUser.uid;
@@ -71,27 +69,34 @@ function getRecommendations(donation_history_dict, possible_events) { // Sorted 
   var max_2 = Object.keys(donation_history_dict_2).reduce(function(a, b){ return donation_history_dict_2[a] > donation_history_dict_2[b] ? a : b });
 
   var counter = 0;
-  var rec_arr = []
+  var rec_arr = [];
+  var unused_buffer = [];
+  var save_to_unused = true;
   for (var i = 0; i<10; i++) {
     if ((possible_events[i][type] == max) || (possible_events[i][type] == max_2)) {
       rec_arr.append(i);
+    } else if(save_to_unused) {
+      save_to_unused.append()
     }
+  }
+  if(len(rec_arr)<10){
+
   }
   return rec_arr;
 }
 
-function generate_possible_events() {
-  // fill in with code to sort a given array of events by "trend". the trend property of an event is not yet initialized in firebase
-}
-
 async function send_donate_notif() {
-    Email.send("email.paragon.official@gmail.com",
+  Email.send("email.paragon.official@gmail.com",
     await firebase.database().ref('donation_requests/email').once("value").then(function(snapshot){
       var email = snapshot.val();
     }),
     "This is a subject",
-  "this is the body",
-  "smtp.yourisp.com",
-  "username",
-  "password");
+    "this is the body",
+    "smtp.yourisp.com",
+    "username",
+    "password");
+}
+
+function send_donate_notif() {
+
 }
