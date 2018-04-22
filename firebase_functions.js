@@ -8,7 +8,9 @@ function login(email, password) {
   });
   donate("random3");
   createDonationRequest("yoo", 2, 2, "random", "nanoseed")
-  generate_possible_events();
+  test_donation_history_dict = {"troll": 5, "breh": 3, "yo": 2};
+  test_possible_events = [{"unb":"r"}, {"type": "troll"}, {"type": "troll"}, {"type": "troll"}, {"type": "troll"}, {"type": "troll"}, {"type": "troll"}, {"type": "breh"}, {"type": "eee"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}];
+  console.log(getRecommendations(test_donation_history_dict, test_possible_events));
   alert("here");
   add_listeners();
 }
@@ -65,23 +67,39 @@ function createDonationRequest(req, lat, lang, type, org) {
 
 function getRecommendations(donation_history_dict, possible_events) { // Sorted array of event objects, decreasing order of trend
   var max = Object.keys(donation_history_dict).reduce(function(a, b){ return donation_history_dict[a] > donation_history_dict[b] ? a : b });
-  var donation_history_dict_2 = _objectWithoutProperties(donation_history_dict, [str(max)])
+  var donation_history_dict_2 = Object.assign({}, donation_history_dict);
+  delete donation_history_dict_2[max]
   var max_2 = Object.keys(donation_history_dict_2).reduce(function(a, b){ return donation_history_dict_2[a] > donation_history_dict_2[b] ? a : b });
 
   var counter = 0;
   var rec_arr = [];
   var unused_buffer = [];
-  var save_to_unused = true;
-  for (var i = 0; i<10; i++) {
-    if ((possible_events[i][type] == max) || (possible_events[i][type] == max_2)) {
-      rec_arr.append(i);
-    } else if(save_to_unused) {
-      save_to_unused.append()
+  var add_to_rec = true;
+  for (var i = 0; i<15; i++) {
+    if (i<possible_events.length){
+      if ((possible_events[i]["type"] == max) || (possible_events[i]["type"] == max_2)) {
+        rec_arr.push(i);
+      } else {
+        unused_buffer.push(i)
+      }
     }
   }
-  if(len(rec_arr)<10){
 
+  var buffer_counter = 0;
+  while(add_to_rec){
+    if(rec_arr.length>9){
+      add_to_rec = false;
+    } else {
+      if(buffer_counter<unused_buffer.length){
+        rec_arr.push(unused_buffer[buffer_counter]);
+        buffer_counter ++;
+      }
+    }
+    if(rec_arr.length>possible_events.length - 1){
+      add_to_rec = false;
+    }
   }
+
   return rec_arr;
 }
 
