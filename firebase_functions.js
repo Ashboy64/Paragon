@@ -69,11 +69,18 @@ function getRecommendations(donation_history_dict, possible_events) { // Sorted 
   var max_2 = Object.keys(donation_history_dict_2).reduce(function(a, b){ return donation_history_dict_2[a] > donation_history_dict_2[b] ? a : b });
 
   var counter = 0;
-  var rec_arr = []
+  var rec_arr = [];
+  var unused_buffer = [];
+  var save_to_unused = true;
   for (var i = 0; i<10; i++) {
     if ((possible_events[i][type] == max) || (possible_events[i][type] == max_2)) {
       rec_arr.append(i);
+    } else if(save_to_unused) {
+      save_to_unused.append()
     }
+  }
+  if(len(rec_arr)<10){
+
   }
   return rec_arr;
 }
