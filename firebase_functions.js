@@ -1,24 +1,31 @@
-function login(email, password) {
+function login() {
   var email = document.getElementById("InputEmail1").value;
   var password = document.getElementById("InputPassword1").value;
   firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
     var errorCode = error.code;
     var errorMessage = error.message;
-    alert(errorMessage)
+    alert(errorMessage);
   });
-  donate("random3");
-  createDonationRequest("yoo", 2, 2, "random", "nanoseed")
-  test_donation_history_dict = {"troll": 5, "breh": 3, "yo": 2};
-  test_possible_events = [{"unb":"r"}, {"type": "troll"}, {"type": "troll"}, {"type": "troll"}, {"type": "troll"}, {"type": "troll"}, {"type": "troll"}, {"type": "breh"}, {"type": "eee"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}];
-  console.log(getRecommendations(test_donation_history_dict, test_possible_events));
-  alert("here");
-  add_listeners();
 }
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    donate("random3");
+    createDonationRequest("yoo", 2, 2, "random", "nanoseed");
+    test_donation_history_dict = {"troll": 5, "breh": 3, "yo": 2};
+    test_possible_events = [{"unb":"r"}, {"type": "troll"}, {"type": "troll"}, {"type": "troll"}, {"type": "troll"}, {"type": "troll"}, {"type": "troll"}, {"type": "breh"}, {"type": "eee"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}, {"type": "breh"}];
+    console.log(getRecommendations(test_donation_history_dict, test_possible_events));
+    alert("here");
+    add_listeners();
+  } else {
+    add_listeners();
+  }
+});
 
 function sign_out() {
   firebase.auth().signOut()
   alert("signed out")
-  add_listeners();
+  // add_listeners();
 }
 
 function sign_up() {
@@ -38,6 +45,9 @@ function add_listeners() {
 }
 
 window.onload = function() {
+  // if(firebase.auth().currentUser != null){
+  //   sign_out();
+  // }
   add_listeners();
 }
 
